@@ -1,7 +1,9 @@
-<app-header brandName="Julio Bacoli" [projectCount]="0" />
+<app-header brandName="Julio Bacoli" [projectCount]="projectsService.count" />
 
 <app-hero-section
   heroText="Um desenvolvedor sênior. Atualmente trabalhando em projetos de"
   clientName="alto impacto"
   clientUrl=""
 />
+
+<app-projects-grid />

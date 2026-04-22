@@ -1,0 +1,5 @@
+<section id="projects" class="projects-grid">
+  @for (project of projectsService.projects; track project.url) {
+    <app-project-card [project]="project" />
+  }
+</section>

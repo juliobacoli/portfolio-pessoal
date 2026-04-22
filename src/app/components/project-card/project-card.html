@@ -1,0 +1,12 @@
+<div class="card">
+  <a [href]="project().url" target="_blank" rel="noopener" class="card-image-link">
+    <img [src]="project().imageUrl" [alt]="project().name" class="card-image" />
+  </a>
+  <div class="card-body">
+    <h3 class="card-name">{{ project().name }}</h3>
+    <p class="card-description">{{ project().description }}</p>
+    <a [href]="project().url" target="_blank" rel="noopener" class="card-url">
+      {{ project().url }}
+    </a>
+  </div>
+</div>
