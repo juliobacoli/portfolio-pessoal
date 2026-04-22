@@ -6,7 +6,7 @@ import { Project } from '../../services/projects';
   templateUrl: './project-card.html',
   styleUrl: './project-card.scss',
   host: {
-    '[style.grid-column]': '"span " + project().cols',
+    '[style.grid-column]': 'project().featured ? "1 / -1" : "span 1"',
   },
 })
 export class ProjectCard {
