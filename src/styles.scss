@@ -1,0 +1,29 @@
+:root {
+  --color-bg: #0D0D1A;
+  --color-text: #E6E7D6;
+  --color-accent: #43BCC0;
+  --color-interaction: #FFE600;
+
+  --font-sans: 'Inter', sans-serif;   /* nav, títulos, CTAs, bold */
+  --font-serif: 'Lora', serif;        /* hero, descrições de projetos */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

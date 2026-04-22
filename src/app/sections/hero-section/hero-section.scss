@@ -1,0 +1,28 @@
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 2.5rem;
+}
+
+.hero-text {
+  font-family: var(--font-serif), serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 72px;
+  line-height: 108px;
+  color: var(--color-text);
+  text-align: center;
+  max-width: 1100px;
+}
+
+.hero-client {
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 72px;
+  line-height: 108px;
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
