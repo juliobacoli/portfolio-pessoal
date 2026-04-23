@@ -21,7 +21,7 @@ export class ProjectsService {
     },
     {
       name: 'AH2 Carreiras',
-      description: 'Portal de vagas e oportunidades para uma empresa de refrigeração.',
+      description: 'Portal de vagas e oportunidades.',
       url: 'https://www.ah2carreiras.com.br/',
       imageUrl: '/tecnico-em-refrigeracao.png',
     },
@@ -33,7 +33,7 @@ export class ProjectsService {
     },
     {
       name: 'IC Pedra Angular',
-      description: 'Site institucional para uma igreja cristã em São Paulo.',
+      description: 'Site institucional para uma igreja cristã em Taboão da Serra.',
       url: 'https://www.icpedraangular.com.br/',
       imageUrl: '/igreja-portfolio.jpg',
       featured: true,
