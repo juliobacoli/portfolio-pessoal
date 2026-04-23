@@ -1,12 +1,28 @@
-<div class="card" [class.card--featured]="project().featured">
-  <a [href]="project().url" target="_blank" rel="noopener" class="card-image-link">
-    <img [src]="project().imageUrl" [alt]="project().name" class="card-image" />
-  </a>
-  <div class="card-body">
-    <h3 class="card-name">{{ project().name }}</h3>
-    <p class="card-description">{{ project().description }}</p>
-    <a [href]="project().url" target="_blank" rel="noopener" class="card-url">
-      {{ project().url }}
+<div class="project-card" [class.project-card--featured]="project().featured">
+  <div class="placeholder-container">
+    <a [href]="project().url" target="_blank" rel="noopener" class="image-link">
+      @if (project().videoUrl) {
+        <video 
+          [src]="project().videoUrl" 
+          [autoplay]="true" 
+          [loop]="true" 
+          [muted]="true" 
+          playsinline 
+          class="project-image">
+        </video>
+      } @else {
+        <img [src]="project().imageUrl" [alt]="project().name" class="project-image" />
+      }
     </a>
+  </div>
+
+  <div class="info-container">
+    <h2 class="project-title">{{ project().name }}</h2>
+    <p class="project-description">{{ project().description }}</p>
+    <p class="project-link-wrapper">
+      <a [href]="project().url" target="_blank" rel="noopener" class="project-url">
+        {{ project().url }}
+      </a>
+    </p>
   </div>
 </div>

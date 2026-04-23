@@ -1,5 +1,7 @@
-<section id="projects" class="projects-grid">
+<div id="projects" class="projects-grid">
   @for (project of projectsService.projects; track project.url) {
-    <app-project-card [project]="project" />
+    <div class="project-wrapper">
+      <app-project-card [project]="project" />
+    </div>
   }
-</section>
+</div>

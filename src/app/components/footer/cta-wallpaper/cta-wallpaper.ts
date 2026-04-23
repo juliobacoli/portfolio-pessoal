@@ -18,6 +18,7 @@ export class CtaWallpaper implements OnInit {
 
   @HostListener('window:resize')
   calculate(): void {
-    this.ovals = Array(16).fill(0);
+    const isMobile = window.innerWidth < 768;
+    this.ovals = Array(isMobile ? 1 : 16).fill(0);
   }
 }
