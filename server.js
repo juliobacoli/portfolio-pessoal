@@ -23,6 +23,13 @@ app.use((req, res, next) => {
   next();
 });
 
+const BLOCKED = /(\.\.|\.env|\.git|server\.js|package\.json|node_modules)/i;
+
+app.use((req, res, next) => {
+  if (BLOCKED.test(req.path)) return res.status(404).end();
+  next();
+});
+
 app.use(express.static(path.join(__dirname, 'dist/portfolio-pessoal/browser')));
 
 app.get('*', (req, res) => {
