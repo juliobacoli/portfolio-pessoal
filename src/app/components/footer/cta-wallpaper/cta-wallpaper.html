@@ -1,7 +1,7 @@
 <div id="contact" class="wallpaper">
   @for (oval of ovals; track $index) {
     <div class="cell">
-      <a #ovalElement class="oval" href="mailto:juliosantanabacoli@gmail.com">Vamos Conversar</a>
+      <button #ovalElement type="button" class="oval" (click)="openContact($event)">Vamos Conversar</button>
     </div>
   }
 </div>

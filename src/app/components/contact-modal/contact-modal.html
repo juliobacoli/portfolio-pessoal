@@ -1,0 +1,144 @@
+@if (state.isOpen()) {
+  <div
+    class="backdrop"
+    [class.visible]="state.isOpen()"
+    (click)="onBackdropClick()"
+    aria-hidden="true"
+  ></div>
+
+  <div
+    #dialog
+    class="dialog"
+    [class.visible]="state.isOpen()"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="contactModalTitle"
+  >
+    <button
+      type="button"
+      class="close-btn"
+      (click)="closeBtn()"
+      [disabled]="submitState() === 'sending'"
+      aria-label="Fechar"
+    >×</button>
+
+    @if (submitState() !== 'success') {
+      <header class="dialog-header">
+        <p class="kicker">Portfolio &middot; Julio Bacoli</p>
+        <h2 id="contactModalTitle" class="title">Conte-me sobre o seu projeto</h2>
+      </header>
+
+      <div class="stripe" aria-hidden="true"></div>
+
+      <div class="dialog-body">
+        <p class="subtitle">Respondo pessoalmente em até 48h.</p>
+
+        @if (submitAttempted() && form.invalid && submitState() === 'idle') {
+          <div class="form-banner" role="alert">Preencha os campos obrigatórios.</div>
+        }
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate [class.shake]="shake()">
+          <div class="field" [class.invalid]="fieldInvalid('nome')">
+            <label class="field-label" for="contact-nome">Nome</label>
+            <input
+              #firstInput
+              id="contact-nome"
+              type="text"
+              formControlName="nome"
+              autocomplete="name"
+            />
+            @if (fieldInvalid('nome')) {
+              <small class="err">{{ fieldError('nome') }}</small>
+            }
+          </div>
+
+          <div class="field" [class.invalid]="fieldInvalid('email')">
+            <label class="field-label" for="contact-email">E-mail</label>
+            <input
+              id="contact-email"
+              type="email"
+              formControlName="email"
+              autocomplete="email"
+            />
+            @if (fieldInvalid('email')) {
+              <small class="err">{{ fieldError('email') }}</small>
+            }
+          </div>
+
+          <div class="field select-field">
+            <label class="field-label" for="contact-tipo">Tipo</label>
+            <select id="contact-tipo" formControlName="tipo">
+              <option value="">Selecione (opcional)</option>
+              <option value="Vaga">Vaga</option>
+              <option value="Projeto">Projeto</option>
+              <option value="Conversa">Conversa</option>
+            </select>
+          </div>
+
+          <div class="field message-field" [class.invalid]="fieldInvalid('mensagem')">
+            <label class="field-label" for="contact-mensagem">Mensagem</label>
+            <textarea
+              id="contact-mensagem"
+              formControlName="mensagem"
+              rows="5"
+              placeholder="Conte um pouco sobre o que você precisa..."
+            ></textarea>
+            @if (fieldInvalid('mensagem')) {
+              <small class="err">{{ fieldError('mensagem') }}</small>
+            }
+          </div>
+
+          <div class="hp" aria-hidden="true">
+            <label>Não preencha: <input type="text" formControlName="website" tabindex="-1" autocomplete="off" /></label>
+          </div>
+
+          @if (submitState() === 'error') {
+            <p class="form-error">{{ errorMsg() }}</p>
+          }
+
+          <div class="actions">
+            @if (submitState() === 'error') {
+              <button type="button" class="btn-secondary" (click)="retry()">Tentar novamente</button>
+            }
+            <button type="submit" class="btn-primary" [disabled]="submitState() === 'sending'">
+              @if (submitState() === 'sending') {
+                <span class="spinner" aria-hidden="true"></span> Enviando...
+              } @else {
+                Enviar mensagem
+              }
+            </button>
+          </div>
+        </form>
+      </div>
+    } @else {
+      <header class="dialog-header">
+        <p class="kicker">Portfolio &middot; Julio Bacoli</p>
+        <h2 class="title">Mensagem enviada</h2>
+      </header>
+      <div class="stripe" aria-hidden="true"></div>
+      <div class="dialog-body success">
+        <div class="check" aria-hidden="true">✓</div>
+        <p class="subtitle">Responderei em breve no e-mail informado.</p>
+        <button type="button" class="btn-primary" (click)="state.close()">Fechar</button>
+      </div>
+    }
+  </div>
+
+  @if (showDiscardConfirm()) {
+    <div class="confirm-backdrop" (click)="cancelDiscard()" aria-hidden="true"></div>
+    <div class="confirm-dialog" role="alertdialog" aria-modal="true" aria-labelledby="discardConfirmTitle">
+      <header class="dialog-header">
+        <p class="kicker">Atenção</p>
+        <h2 id="discardConfirmTitle" class="title">Descartar mensagem?</h2>
+      </header>
+      <div class="stripe" aria-hidden="true"></div>
+      <div class="dialog-body">
+        <p class="subtitle">Você perderá o que digitou.</p>
+        <div class="actions actions-confirm">
+          <button type="button" class="btn-danger" (click)="confirmDiscard()">Descartar</button>
+          <button #confirmDefaultBtn type="button" class="btn-primary" (click)="cancelDiscard()">Continuar editando</button>
+        </div>
+      </div>
+    </div>
+  }
+}

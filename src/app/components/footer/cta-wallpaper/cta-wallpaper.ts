@@ -1,4 +1,5 @@
-import { Component, HostListener, OnInit, ElementRef, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
+import { Component, HostListener, OnInit, ElementRef, ViewChildren, QueryList, AfterViewInit, inject } from '@angular/core';
+import { ContactModalState } from '../../../services/contact-modal-state';
 
 @Component({
   selector: 'app-cta-wallpaper',
@@ -7,8 +8,13 @@ import { Component, HostListener, OnInit, ElementRef, ViewChildren, QueryList, A
 })
 export class CtaWallpaper implements OnInit, AfterViewInit {
   ovals: number[] = [];
-  
+  private modalState = inject(ContactModalState);
+
   @ViewChildren('ovalElement') ovalElements!: QueryList<ElementRef>;
+
+  openContact(event: MouseEvent) {
+    this.modalState.open(event.currentTarget as HTMLElement);
+  }
 
   ngOnInit(): void {
     this.calculate();
