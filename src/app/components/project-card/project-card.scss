@@ -15,13 +15,6 @@
 
 .placeholder-container {
   width: 100%;
-  
-  // Mobile specific dimensions for 438px screen width
-  @media (max-width: 438px) {
-    width: 378px;
-    height: 252px;
-    margin: 0 auto;
-  }
 }
 
 .image-link {
@@ -37,11 +30,7 @@
   border-radius: 24px;
   display: block;
   background-color: #1a1a2e;
-  
-  // Fallback aspect ratio for desktop
-  @media (min-width: 439px) {
-    aspect-ratio: 3 / 2;
-  }
+  aspect-ratio: 3 / 2;
 }
 
 .info-container {
@@ -49,11 +38,6 @@
   flex-direction: column;
   gap: 0.4rem;
   text-align: center;
-
-  @media (max-width: 438px) {
-    width: 378px;
-    margin: 0 auto;
-  }
 }
 
 .project-title {
@@ -64,12 +48,6 @@
   line-height: 20px;
   color: var(--color-text);
   margin: 0;
-
-  @media (max-width: 438px) {
-    width: 378px;
-    height: 21px;
-    overflow: hidden;
-  }
 }
 
 .project-description {
