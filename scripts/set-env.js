@@ -49,5 +49,6 @@ const content = `export const environment = {
 `;
 
 const target = path.join(__dirname, '..', 'src', 'environments', 'environment.ts');
+fs.mkdirSync(path.dirname(target), { recursive: true });
 fs.writeFileSync(target, content, 'utf8');
 console.log('[set-env] environment.ts gerado em', target);
