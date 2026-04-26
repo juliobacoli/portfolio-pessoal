@@ -482,7 +482,7 @@ form.shake {
   }
 
   .dialog-body {
-    padding: 26px 24px 24px;
+    padding: 26px 24px calc(48px + env(safe-area-inset-bottom));
   }
 
   .title {
