@@ -9,8 +9,8 @@ app.use((req, res, next) => {
     "script-src 'self' 'unsafe-inline'",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
-    "img-src 'self' data:",
-    "connect-src 'self'",
+    "img-src 'self' data: https://www.google.com",
+    "connect-src 'self' https://firestore.googleapis.com https://api.emailjs.com",
     "frame-ancestors 'none'",
   ].join('; '));
   res.setHeader('X-Frame-Options', 'DENY');

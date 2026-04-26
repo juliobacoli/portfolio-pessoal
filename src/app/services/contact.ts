@@ -9,19 +9,38 @@ export interface ContactPayload {
   mensagem: string;
 }
 
+const REQUEST_TIMEOUT_MS = 15000;
+
+function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error(`Timeout: ${label}`)), ms);
+    promise.then(
+      (value) => { clearTimeout(timer); resolve(value); },
+      (err) => { clearTimeout(timer); reject(err); }
+    );
+  });
+}
+
 @Injectable({ providedIn: 'root' })
 export class ContactService {
   private readonly firestore = inject(Firestore);
 
   async send(payload: ContactPayload): Promise<void> {
     const colecao = collection(this.firestore, 'contatos_recebidos');
-    await addDoc(colecao, {
-      ...payload,
-      criadoEm: serverTimestamp(),
-      userAgent: navigator.userAgent,
-    });
+    const cleanPayload = Object.fromEntries(
+      Object.entries(payload).filter(([, v]) => v !== undefined)
+    );
+    await withTimeout(
+      addDoc(colecao, {
+        ...cleanPayload,
+        criadoEm: serverTimestamp(),
+        userAgent: navigator.userAgent,
+      }),
+      REQUEST_TIMEOUT_MS,
+      'gravar contato no Firestore'
+    );
 
-    await this.sendEmail(payload);
+    await withTimeout(this.sendEmail(payload), REQUEST_TIMEOUT_MS, 'enviar email');
   }
 
   private async sendEmail(payload: ContactPayload): Promise<void> {
