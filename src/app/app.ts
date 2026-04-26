@@ -6,6 +6,7 @@ import { Footer } from './components/footer/footer/footer';
 import { ContactModal } from './components/contact-modal/contact-modal';
 import { ProjectsService } from './services/projects';
 import { ContactModalState } from './services/contact-modal-state';
+import { MetricsService } from './services/metrics';
 import Lenis from 'lenis';
 
 @Component({
@@ -17,6 +18,7 @@ import Lenis from 'lenis';
 export class App implements OnInit, OnDestroy {
   protected projectsService = inject(ProjectsService);
   private modalState = inject(ContactModalState);
+  private metricsService = inject(MetricsService);
   private lenis?: Lenis;
   private el = inject(ElementRef);
   private clickListener?: (e: MouseEvent) => void;
@@ -31,6 +33,7 @@ export class App implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.metricsService.trackVisit();
     this.lenis = new Lenis({
       autoRaf: true,
     });

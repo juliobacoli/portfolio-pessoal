@@ -47,4 +47,5 @@ Thumbs.db
 .env
 .env.local
 .env.*.local
+.claude/
 src/environments/environment.ts
