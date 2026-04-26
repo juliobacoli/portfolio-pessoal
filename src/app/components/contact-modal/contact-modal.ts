@@ -43,14 +43,12 @@ export class ContactModal {
   });
 
   private readonly dialogRef = viewChild<ElementRef<HTMLDivElement>>('dialog');
-  private readonly firstInputRef = viewChild<ElementRef<HTMLInputElement>>('firstInput');
   private readonly confirmDefaultBtnRef = viewChild<ElementRef<HTMLButtonElement>>('confirmDefaultBtn');
 
   constructor() {
     effect(() => {
       const open = this.state.isOpen();
       if (open) {
-        queueMicrotask(() => this.firstInputRef()?.nativeElement.focus());
         document.body.style.overflow = 'hidden';
       } else {
         document.body.style.overflow = '';
@@ -180,6 +178,13 @@ export class ContactModal {
   fieldInvalid(name: string): boolean {
     const c = this.form.get(name);
     return !!(c && c.invalid && (c.touched || c.dirty || this.submitAttempted()));
+  }
+
+  onFieldFocus(event: FocusEvent) {
+    const el = event.target as HTMLElement;
+    setTimeout(() => {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 500);
   }
 
   fieldError(name: string): string {

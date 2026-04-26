@@ -13,7 +13,10 @@
     role="dialog"
     aria-modal="true"
     aria-labelledby="contactModalTitle"
+    data-lenis-prevent
   >
+    <div class="sheet-handle" aria-hidden="true"></div>
+
     <button
       type="button"
       class="close-btn"
@@ -41,11 +44,11 @@
           <div class="field" [class.invalid]="fieldInvalid('nome')">
             <label class="field-label" for="contact-nome">Nome</label>
             <input
-              #firstInput
               id="contact-nome"
               type="text"
               formControlName="nome"
               autocomplete="name"
+              (focus)="onFieldFocus($event)"
             />
             @if (fieldInvalid('nome')) {
               <small class="err">{{ fieldError('nome') }}</small>
@@ -59,6 +62,7 @@
               type="email"
               formControlName="email"
               autocomplete="email"
+              (focus)="onFieldFocus($event)"
             />
             @if (fieldInvalid('email')) {
               <small class="err">{{ fieldError('email') }}</small>
@@ -82,6 +86,7 @@
               formControlName="mensagem"
               rows="5"
               placeholder="Conte um pouco sobre o que você precisa..."
+              (focus)="onFieldFocus($event)"
             ></textarea>
             @if (fieldInvalid('mensagem')) {
               <small class="err">{{ fieldError('mensagem') }}</small>

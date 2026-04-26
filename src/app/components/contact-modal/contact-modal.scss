@@ -413,32 +413,76 @@ form.shake {
   }
 }
 
+.sheet-handle {
+  display: none;
+}
+
 @media (max-width: 600px) {
   .dialog {
     width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
-    top: 0;
+    max-width: 100vw;
+    max-height: 85vh;
+    max-height: 85dvh;
+    top: auto;
+    bottom: 0;
     left: 0;
-    transform: scale(0.95);
-    border-radius: 0;
+    transform: translateY(100%);
+    border-radius: 18px 18px 0 0;
     border: none;
-    animation-name: scaleInMobile;
+    border-top: 1px solid #22224a;
+    animation-name: slideUpMobile;
+    padding-bottom: env(safe-area-inset-bottom);
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(67, 188, 192, 0.4) transparent;
   }
 
-  @keyframes scaleInMobile {
+  .dialog::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .dialog::-webkit-scrollbar-thumb {
+    background: rgba(67, 188, 192, 0.4);
+    border-radius: 999px;
+  }
+
+  .dialog::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  @keyframes slideUpMobile {
     to {
       opacity: 1;
-      transform: scale(1);
+      transform: translateY(0);
     }
   }
 
+  .sheet-handle {
+    display: block;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 5px;
+    background: rgba(13, 13, 26, 0.35);
+    border-radius: 999px;
+    z-index: 5;
+  }
+
+  .close-btn {
+    top: 18px;
+  }
+
   .dialog-header {
-    padding: 28px 24px 24px;
+    padding: 32px 24px 22px;
   }
 
   .dialog-body {
-    padding: 28px 24px 24px;
+    padding: 26px 24px 24px;
   }
 
   .title {
@@ -447,5 +491,10 @@ form.shake {
 
   .actions {
     flex-direction: column-reverse;
+  }
+
+  .confirm-dialog {
+    width: calc(100vw - 32px);
+    border-radius: 14px;
   }
 }
