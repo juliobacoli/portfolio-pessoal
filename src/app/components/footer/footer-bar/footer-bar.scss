@@ -2,14 +2,43 @@
   background-color: var(--color-bg);
   padding: 4rem 1.5rem;
   display: flex;
-  justify-content: center; // Centralizado no mobile
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
   text-align: center;
 
   @media (min-width: 768px) {
     padding: 6rem 2.5rem;
-    justify-content: space-between; // Espalhado no desktop
+    padding-top: 4.653138rem;
+    padding-bottom: 2rem;
     text-align: left;
   }
+}
+
+.footer-row {
+  display: flex;
+  justify-content: center; // Centralizado no mobile
+  width: 100%;
+
+  @media (min-width: 768px) {
+    justify-content: space-between; // Espalhado no desktop
+  }
+}
+
+.footer-center {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
+  text-align: center;
+}
+
+.company-name,
+.company-cnpj {
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #FFFFFF;
 }
 
 .footer-left {

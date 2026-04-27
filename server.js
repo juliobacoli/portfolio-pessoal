@@ -2,15 +2,17 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
+app.set('trust proxy', true);
+
 app.use((req, res, next) => {
   res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   res.setHeader('Content-Security-Policy', [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline'",
+    "script-src 'self' 'unsafe-inline' https://*.cloudflare.com https://challenges.cloudflare.com",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' data: https://www.google.com",
-    "connect-src 'self' https://firestore.googleapis.com https://api.emailjs.com",
+    "connect-src 'self' https://firestore.googleapis.com https://api.emailjs.com https://*.cloudflare.com",
     "frame-ancestors 'none'",
   ].join('; '));
   res.setHeader('X-Frame-Options', 'DENY');
