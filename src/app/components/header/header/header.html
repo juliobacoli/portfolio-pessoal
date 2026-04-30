@@ -6,12 +6,15 @@
   </button>
 </header>
 
-@if (isBsOpen()) {
-  <div class="bs-backdrop" (click)="closeBs()"></div>
-  <div class="bs-sheet">
-    <div class="bs-handle"></div>
-    <a class="bs-link" href="#projects" (click)="closeBs()">Projetos Selecionados</a>
-    <a class="bs-link" href="#about" (click)="closeBs()">Sobre</a>
-    <a class="bs-link" href="#contact" (click)="closeBs()">Fale comigo</a>
-  </div>
-}
+<div class="bs-backdrop" [class.bs-active]="isBsOpen()" (click)="closeBs()"></div>
+<div class="bs-sheet" [class.bs-active]="isBsOpen()">
+  <div class="bs-handle"></div>
+  <a class="bs-link" href="#projects" (click)="closeBs()">
+    Projetos Selecionados
+    @if (projectCount() > 0) {
+      <span class="bs-badge">{{ projectCount() }}</span>
+    }
+  </a>
+  <a class="bs-link" href="#about" (click)="closeBs()">Sobre</a>
+  <a class="bs-link" href="#contact" (click)="closeBs()">Fale comigo</a>
+</div>
