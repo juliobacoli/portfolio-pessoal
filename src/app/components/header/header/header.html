@@ -1,4 +1,17 @@
 <header class="header">
   <app-nav-brand [name]="brandName()" />
   <app-nav-menu [projectCount]="projectCount()" />
+  <button type="button" class="bs-hamburger" [class.bs-open]="isBsOpen()" (click)="toggleBs()" aria-label="Abrir menu">
+    <span></span><span></span><span></span>
+  </button>
 </header>
+
+@if (isBsOpen()) {
+  <div class="bs-backdrop" (click)="closeBs()"></div>
+  <div class="bs-sheet">
+    <div class="bs-handle"></div>
+    <a class="bs-link" href="#projects" (click)="closeBs()">Projetos Selecionados</a>
+    <a class="bs-link" href="#about" (click)="closeBs()">Sobre</a>
+    <a class="bs-link" href="#contact" (click)="closeBs()">Fale comigo</a>
+  </div>
+}
