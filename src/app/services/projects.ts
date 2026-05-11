@@ -14,7 +14,7 @@ export class ProjectsService {
   readonly projects: Project[] = [
     {
       name: 'Feriados BR',
-      description: 'Consulta de feriados nacionais e estaduais do Brasil.',
+      description: 'Consulta de feriados nacionais do Brasil.',
       url: 'https://www.feriadosbr.online/',
       imageUrl: 'https://placehold.co/600x600/1a2a2a/E6E7D6?text=Feriados+BR',
       videoUrl: '/feriado-video.mp4',
@@ -36,7 +36,7 @@ export class ProjectsService {
       description: 'Site institucional para uma igreja cristã em Taboão da Serra.',
       url: 'https://www.icpedraangular.com.br/',
       imageUrl: '/igreja-portfolio.jpg',
-      featured: true,
+      featured: true, // ocupa largura total do grid (grid-column: 1 / -1) — revisar se intencional
     },
   ];
 
