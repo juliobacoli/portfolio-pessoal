@@ -1,6 +1,18 @@
 <header class="header">
-  <app-nav-brand [name]="brandName()" />
+  <div class="brand-group">
+    <app-nav-brand [name]="brandName()" />
+    <div class="lang-switcher-mobile">
+      <button type="button" [class.active]="currentLang() === 'pt'" (click)="switchLang('pt')">PT</button>
+      <span class="lang-sep">|</span>
+      <button type="button" [class.active]="currentLang() === 'en'" (click)="switchLang('en')">EN</button>
+    </div>
+  </div>
   <app-nav-menu [projectCount]="projectCount()" />
+  <div class="lang-switcher">
+    <button type="button" [class.active]="currentLang() === 'pt'" (click)="switchLang('pt')">PT</button>
+    <span class="lang-sep">|</span>
+    <button type="button" [class.active]="currentLang() === 'en'" (click)="switchLang('en')">EN</button>
+  </div>
   <button type="button" class="bs-hamburger" [class.bs-open]="isBsOpen()" (click)="toggleBs()" aria-label="Abrir menu">
     <span></span><span></span><span></span>
   </button>
@@ -10,11 +22,11 @@
 <div class="bs-sheet" [class.bs-active]="isBsOpen()">
   <div class="bs-handle"></div>
   <a class="bs-link" href="#projects" (click)="closeBs()">
-    Projetos Selecionados
+    {{ 'nav.projects' | translate }}
     @if (projectCount() > 0) {
       <span class="bs-badge">{{ projectCount() }}</span>
     }
   </a>
-  <a class="bs-link" href="#about" (click)="closeBs()">Sobre</a>
-  <a class="bs-link" href="#contact" (click)="closeBs()">Fale comigo</a>
+  <a class="bs-link" href="#about" (click)="closeBs()">{{ 'nav.about' | translate }}</a>
+  <a class="bs-link" href="#contact" (click)="closeBs()">{{ 'nav.contact' | translate }}</a>
 </div>

@@ -22,27 +22,27 @@
       class="close-btn"
       (click)="closeBtn()"
       [disabled]="submitState() === 'sending'"
-      aria-label="Fechar"
+      [attr.aria-label]="'contact.close' | translate"
     >×</button>
 
     @if (submitState() !== 'success') {
       <header class="dialog-header">
-        <p class="kicker">Portfolio &middot; Julio Bacoli</p>
-        <h2 id="contactModalTitle" class="title">Conte-me sobre o seu projeto</h2>
+        <p class="kicker">{{ 'contact.kicker' | translate }}</p>
+        <h2 id="contactModalTitle" class="title">{{ 'contact.title' | translate }}</h2>
       </header>
 
       <div class="stripe" aria-hidden="true"></div>
 
       <div class="dialog-body">
-        <p class="subtitle">Respondo pessoalmente em até 48h.</p>
+        <p class="subtitle">{{ 'contact.subtitle' | translate }}</p>
 
         @if (submitAttempted() && form.invalid && submitState() === 'idle') {
-          <div class="form-banner" role="alert">Preencha os campos obrigatórios.</div>
+          <div class="form-banner" role="alert">{{ 'contact.banner_required' | translate }}</div>
         }
 
         <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate [class.shake]="shake()">
           <div class="field" [class.invalid]="fieldInvalid('nome')">
-            <label class="field-label" for="contact-nome">Nome</label>
+            <label class="field-label" for="contact-nome">{{ 'contact.field_name' | translate }}</label>
             <input
               id="contact-nome"
               type="text"
@@ -56,7 +56,7 @@
           </div>
 
           <div class="field" [class.invalid]="fieldInvalid('email')">
-            <label class="field-label" for="contact-email">E-mail</label>
+            <label class="field-label" for="contact-email">{{ 'contact.field_email' | translate }}</label>
             <input
               id="contact-email"
               type="email"
@@ -70,22 +70,22 @@
           </div>
 
           <div class="field select-field">
-            <label class="field-label" for="contact-tipo">Tipo</label>
+            <label class="field-label" for="contact-tipo">{{ 'contact.field_type' | translate }}</label>
             <select id="contact-tipo" formControlName="tipo">
-              <option value="">Selecione (opcional)</option>
-              <option value="Vaga">Vaga</option>
-              <option value="Projeto">Projeto</option>
-              <option value="Conversa">Conversa</option>
+              <option value="">{{ 'contact.field_type_placeholder' | translate }}</option>
+              <option value="Vaga">{{ 'contact.field_type_job' | translate }}</option>
+              <option value="Projeto">{{ 'contact.field_type_project' | translate }}</option>
+              <option value="Conversa">{{ 'contact.field_type_chat' | translate }}</option>
             </select>
           </div>
 
           <div class="field message-field" [class.invalid]="fieldInvalid('mensagem')">
-            <label class="field-label" for="contact-mensagem">Mensagem</label>
+            <label class="field-label" for="contact-mensagem">{{ 'contact.field_message' | translate }}</label>
             <textarea
               id="contact-mensagem"
               formControlName="mensagem"
               rows="5"
-              placeholder="Conte um pouco sobre o que você precisa..."
+              [placeholder]="'contact.field_message_placeholder' | translate"
               (focus)="onFieldFocus($event)"
             ></textarea>
             @if (fieldInvalid('mensagem')) {
@@ -103,13 +103,13 @@
 
           <div class="actions">
             @if (submitState() === 'error') {
-              <button type="button" class="btn-secondary" (click)="retry()">Tentar novamente</button>
+              <button type="button" class="btn-secondary" (click)="retry()">{{ 'contact.btn_retry' | translate }}</button>
             }
             <button type="submit" class="btn-primary" [disabled]="submitState() === 'sending'">
               @if (submitState() === 'sending') {
-                <span class="spinner" aria-hidden="true"></span> Enviando...
+                <span class="spinner" aria-hidden="true"></span> {{ 'contact.btn_sending' | translate }}
               } @else {
-                Enviar mensagem
+                {{ 'contact.btn_submit' | translate }}
               }
             </button>
           </div>
@@ -117,14 +117,14 @@
       </div>
     } @else {
       <header class="dialog-header">
-        <p class="kicker">Portfolio &middot; Julio Bacoli</p>
-        <h2 class="title">Mensagem enviada</h2>
+        <p class="kicker">{{ 'contact.kicker' | translate }}</p>
+        <h2 class="title">{{ 'contact.success_title' | translate }}</h2>
       </header>
       <div class="stripe" aria-hidden="true"></div>
       <div class="dialog-body success">
         <div class="check" aria-hidden="true">✓</div>
-        <p class="subtitle">Responderei em breve no e-mail informado.</p>
-        <button type="button" class="btn-primary" (click)="state.close()">Fechar</button>
+        <p class="subtitle">{{ 'contact.success_subtitle' | translate }}</p>
+        <button type="button" class="btn-primary" (click)="state.close()">{{ 'contact.close' | translate }}</button>
       </div>
     }
   </div>
@@ -133,15 +133,15 @@
     <div class="confirm-backdrop" (click)="cancelDiscard()" aria-hidden="true"></div>
     <div class="confirm-dialog" role="alertdialog" aria-modal="true" aria-labelledby="discardConfirmTitle">
       <header class="dialog-header">
-        <p class="kicker">Atenção</p>
-        <h2 id="discardConfirmTitle" class="title">Descartar mensagem?</h2>
+        <p class="kicker">{{ 'contact.discard_kicker' | translate }}</p>
+        <h2 id="discardConfirmTitle" class="title">{{ 'contact.discard_title' | translate }}</h2>
       </header>
       <div class="stripe" aria-hidden="true"></div>
       <div class="dialog-body">
-        <p class="subtitle">Você perderá o que digitou.</p>
+        <p class="subtitle">{{ 'contact.discard_subtitle' | translate }}</p>
         <div class="actions actions-confirm">
-          <button type="button" class="btn-danger" (click)="confirmDiscard()">Descartar</button>
-          <button #confirmDefaultBtn type="button" class="btn-primary" (click)="cancelDiscard()">Continuar editando</button>
+          <button type="button" class="btn-danger" (click)="confirmDiscard()">{{ 'contact.discard_confirm' | translate }}</button>
+          <button #confirmDefaultBtn type="button" class="btn-primary" (click)="cancelDiscard()">{{ 'contact.discard_cancel' | translate }}</button>
         </div>
       </div>
     </div>

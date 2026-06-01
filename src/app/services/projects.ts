@@ -13,30 +13,30 @@ export interface Project {
 export class ProjectsService {
   readonly projects: Project[] = [
     {
-      name: 'Feriados BR',
-      description: 'Consulta de feriados nacionais do Brasil.',
+      name: 'projects.feriados_br.name',
+      description: 'projects.feriados_br.description',
       url: 'https://www.feriadosbr.online/',
       imageUrl: 'https://placehold.co/600x600/1a2a2a/E6E7D6?text=Feriados+BR',
       videoUrl: '/feriado-video.mp4',
     },
     {
-      name: 'AH2 Carreiras',
-      description: 'Portal de vagas e oportunidades.',
+      name: 'projects.ah2_carreiras.name',
+      description: 'projects.ah2_carreiras.description',
       url: 'https://www.ah2carreiras.com.br/',
       imageUrl: '/tecnico-em-refrigeracao.png',
     },
     {
-      name: 'Ribeiro Estética',
-      description: 'Site de serviços para estética automotiva.',
+      name: 'projects.ribeiro_estetica.name',
+      description: 'projects.ribeiro_estetica.description',
       url: 'https://www.ribeiroestetica.com.br/',
       imageUrl: '/estetica.png',
     },
     {
-      name: 'IC Pedra Angular',
-      description: 'Site institucional para uma igreja cristã em Taboão da Serra.',
+      name: 'projects.ic_pedra_angular.name',
+      description: 'projects.ic_pedra_angular.description',
       url: 'https://www.icpedraangular.com.br/',
       imageUrl: '/igreja-portfolio.jpg',
-      featured: true, // ocupa largura total do grid (grid-column: 1 / -1) — revisar se intencional
+      featured: true,
     },
   ];
 

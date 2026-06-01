@@ -1,8 +1,10 @@
 import { Component, HostListener, OnInit, ElementRef, ViewChildren, QueryList, AfterViewInit, inject } from '@angular/core';
 import { ContactModalState } from '../../../services/contact-modal-state';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-cta-wallpaper',
+  imports: [TranslateModule],
   templateUrl: './cta-wallpaper.html',
   styleUrl: './cta-wallpaper.scss',
 })

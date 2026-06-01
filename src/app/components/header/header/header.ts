@@ -1,10 +1,11 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, input, signal, inject } from '@angular/core';
 import { NavBrand } from '../nav-brand/nav-brand';
 import { NavMenu } from '../nav-menu/nav-menu';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
-  imports: [NavBrand, NavMenu],
+  imports: [NavBrand, NavMenu, TranslateModule],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
@@ -13,6 +14,13 @@ export class Header {
   projectCount = input<number>(0);
 
   isBsOpen = signal(false);
+  private translate = inject(TranslateService);
+  currentLang = signal<string>('pt');
+
+  switchLang(lang: string) {
+    this.translate.use(lang);
+    this.currentLang.set(lang);
+  }
 
   toggleBs() {
     const next = !this.isBsOpen();
