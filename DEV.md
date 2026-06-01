@@ -21,4 +21,3 @@ Terminal 2 gera URL pública temporária (ex: `https://xyz.trycloudflare.com`) �
 ## Regras de commit
 
 - **Nunca** incluir co-autor (`Co-Authored-By`) em commits ou PRs.
-- Commits e PRs devem ser de autoria exclusiva do dev.
