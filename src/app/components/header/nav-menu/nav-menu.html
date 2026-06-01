@@ -1,10 +1,10 @@
 <nav class="nav-menu">
   <a class="nav-link" href="#projects">
-    Projetos Selecionados
+    {{ 'nav.projects' | translate }}
     @if (projectCount() > 0) {
       <span class="badge">{{ projectCount() }}</span>
     }
   </a>
-  <a class="nav-link" href="#about">Sobre</a>
-  <a class="nav-link" href="#contact">Fale comigo</a>
+  <a class="nav-link" href="#about">{{ 'nav.about' | translate }}</a>
+  <a class="nav-link" href="#contact">{{ 'nav.contact' | translate }}</a>
 </nav>

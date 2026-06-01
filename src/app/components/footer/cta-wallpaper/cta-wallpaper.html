@@ -1,7 +1,7 @@
 <div id="contact" class="wallpaper">
   @for (oval of ovals; track $index) {
     <div class="cell">
-      <button #ovalElement type="button" class="oval" (click)="openContact($event)">Vamos Conversar</button>
+      <button #ovalElement type="button" class="oval" (click)="openContact($event)">{{ 'cta.button' | translate }}</button>
     </div>
   }
 </div>

@@ -112,6 +112,112 @@
   text-align: center;
 }
 
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.lang-switcher-mobile {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-bg);
+    opacity: 0.4;
+    padding: 0;
+    transition: opacity 0.2s ease;
+
+    &.active {
+      opacity: 1;
+      font-weight: 600;
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.lang-switcher {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+
+  @media (min-width: 768px) {
+    display: flex;
+  }
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-bg);
+    opacity: 0.4;
+    padding: 0;
+    transition: opacity 0.2s ease;
+
+    &.active {
+      opacity: 1;
+      font-weight: 600;
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.lang-sep {
+  font-size: 13px;
+  color: var(--color-bg);
+  opacity: 0.4;
+}
+
+.bs-lang {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-accent);
+    opacity: 0.4;
+    padding: 0;
+    transition: opacity 0.2s ease;
+
+    &.active {
+      opacity: 1;
+      font-weight: 600;
+    }
+  }
+
+  .lang-sep {
+    color: var(--color-accent);
+  }
+}
+
 .bs-badge {
   display: inline-flex;
   align-items: center;

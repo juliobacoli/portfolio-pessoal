@@ -1,0 +1,72 @@
+{
+  "nav": {
+    "projects": "Projetos Selecionados",
+    "about": "Sobre",
+    "contact": "Fale comigo"
+  },
+  "hero": {
+    "title": "Um desenvolvedor sênior.",
+    "subtitle_before": "Atualmente trabalhando em projetos de ",
+    "subtitle_after": ".",
+    "client_name": "alto impacto"
+  },
+  "cta": {
+    "button": "Vamos Conversar"
+  },
+  "footer": {
+    "listening_label": "Atualmente ouvindo",
+    "listening_track": "você me contar sobre seu próximo projeto.",
+    "location": "Feito em São Paulo",
+    "copyright": "© 2019 — 2026"
+  },
+  "projects": {
+    "feriados_br": {
+      "name": "Feriados BR",
+      "description": "Consulta de feriados nacionais do Brasil."
+    },
+    "ah2_carreiras": {
+      "name": "AH2 Carreiras",
+      "description": "Portal de vagas e oportunidades."
+    },
+    "ribeiro_estetica": {
+      "name": "Ribeiro Estética",
+      "description": "Site de serviços para estética automotiva."
+    },
+    "ic_pedra_angular": {
+      "name": "IC Pedra Angular",
+      "description": "Site institucional para uma igreja cristã em Taboão da Serra."
+    }
+  },
+  "contact": {
+    "close": "Fechar",
+    "kicker": "Portfolio · Julio Bacoli",
+    "title": "Conte-me sobre o seu projeto",
+    "subtitle": "Respondo pessoalmente em até 48h.",
+    "banner_required": "Preencha os campos obrigatórios.",
+    "field_name": "Nome",
+    "field_email": "E-mail",
+    "field_type": "Tipo",
+    "field_type_placeholder": "Selecione (opcional)",
+    "field_type_job": "Vaga",
+    "field_type_project": "Projeto",
+    "field_type_chat": "Conversa",
+    "field_message": "Mensagem",
+    "field_message_placeholder": "Conte um pouco sobre o que você precisa...",
+    "btn_retry": "Tentar novamente",
+    "btn_sending": "Enviando...",
+    "btn_submit": "Enviar mensagem",
+    "success_title": "Mensagem enviada",
+    "success_subtitle": "Responderei em breve no e-mail informado.",
+    "discard_kicker": "Atenção",
+    "discard_title": "Descartar mensagem?",
+    "discard_subtitle": "Você perderá o que digitou.",
+    "discard_confirm": "Descartar",
+    "discard_cancel": "Continuar editando",
+    "error_send": "Falha no envio. Tenta novamente.",
+    "error_required": "Campo obrigatório.",
+    "error_email": "E-mail inválido.",
+    "error_minlength": "Mínimo {{length}} caracteres.",
+    "error_maxlength": "Máximo {{length}} caracteres.",
+    "error_invalid": "Inválido."
+  }
+}

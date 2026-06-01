@@ -1,7 +1,6 @@
 <section id="about" class="introduction">
   <h1 class="introduction-title">
-    Um desenvolvedor sênior.<br>
-    Atualmente trabalhando em projetos de
-    <span class="highlight">{{ clientName() }}</span>.
+    {{ 'hero.title' | translate }}<br>
+    {{ 'hero.subtitle_before' | translate }}<span class="highlight">{{ clientName() | translate }}</span>{{ 'hero.subtitle_after' | translate }}
   </h1>
 </section>

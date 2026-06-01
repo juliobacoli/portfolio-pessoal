@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-footer-bar',
+  imports: [TranslateModule],
   templateUrl: './footer-bar.html',
   styleUrl: './footer-bar.scss',
 })
-export class FooterBar {
-  readonly track = 'você me contar sobre seu próximo projeto.';
-}
+export class FooterBar {}

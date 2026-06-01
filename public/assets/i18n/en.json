@@ -1,0 +1,72 @@
+{
+  "nav": {
+    "projects": "Selected Projects",
+    "about": "About",
+    "contact": "Get in touch"
+  },
+  "hero": {
+    "title": "A senior developer.",
+    "subtitle_before": "Currently working on ",
+    "subtitle_after": " projects.",
+    "client_name": "high impact"
+  },
+  "cta": {
+    "button": "Let's Talk"
+  },
+  "footer": {
+    "listening_label": "Currently listening to",
+    "listening_track": "you tell me about your next project.",
+    "location": "Made in São Paulo",
+    "copyright": "© 2019 — 2026"
+  },
+  "projects": {
+    "feriados_br": {
+      "name": "Holidays BR",
+      "description": "Brazilian national holidays lookup."
+    },
+    "ah2_carreiras": {
+      "name": "AH2 Careers",
+      "description": "Job listings and opportunities portal."
+    },
+    "ribeiro_estetica": {
+      "name": "Ribeiro Estética",
+      "description": "Automotive detailing services website."
+    },
+    "ic_pedra_angular": {
+      "name": "IC Pedra Angular",
+      "description": "Institutional website for a Christian church in Taboão da Serra."
+    }
+  },
+  "contact": {
+    "close": "Close",
+    "kicker": "Portfolio · Julio Bacoli",
+    "title": "Tell me about your project",
+    "subtitle": "I reply personally within 48h.",
+    "banner_required": "Please fill in the required fields.",
+    "field_name": "Name",
+    "field_email": "E-mail",
+    "field_type": "Type",
+    "field_type_placeholder": "Select (optional)",
+    "field_type_job": "Job opportunity",
+    "field_type_project": "Project",
+    "field_type_chat": "Just a chat",
+    "field_message": "Message",
+    "field_message_placeholder": "Tell me a bit about what you need...",
+    "btn_retry": "Try again",
+    "btn_sending": "Sending...",
+    "btn_submit": "Send message",
+    "success_title": "Message sent",
+    "success_subtitle": "I'll reply shortly to the e-mail provided.",
+    "discard_kicker": "Heads up",
+    "discard_title": "Discard message?",
+    "discard_subtitle": "You'll lose what you typed.",
+    "discard_confirm": "Discard",
+    "discard_cancel": "Keep editing",
+    "error_send": "Failed to send. Please try again.",
+    "error_required": "Required field.",
+    "error_email": "Invalid e-mail.",
+    "error_minlength": "Minimum {{length}} characters.",
+    "error_maxlength": "Maximum {{length}} characters.",
+    "error_invalid": "Invalid."
+  }
+}

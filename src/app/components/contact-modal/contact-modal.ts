@@ -12,12 +12,13 @@ import {
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ContactModalState } from '../../services/contact-modal-state';
 import { ContactService } from '../../services/contact';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 type SubmitState = 'idle' | 'sending' | 'success' | 'error';
 
 @Component({
   selector: 'app-contact-modal',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslateModule],
   templateUrl: './contact-modal.html',
   styleUrl: './contact-modal.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,6 +28,7 @@ export class ContactModal {
   private readonly contactService = inject(ContactService);
   private readonly fb = inject(FormBuilder);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly translate = inject(TranslateService);
 
   protected readonly submitState = signal<SubmitState>('idle');
   protected readonly errorMsg = signal<string>('');
@@ -166,7 +168,7 @@ export class ContactModal {
     } catch (err) {
       console.error('Erro ao enviar contato:', err);
       this.submitState.set('error');
-      this.errorMsg.set('Falha no envio. Tenta novamente.');
+      this.errorMsg.set(this.translate.instant('contact.error_send'));
     }
   }
 
@@ -190,10 +192,10 @@ export class ContactModal {
   fieldError(name: string): string {
     const c = this.form.get(name);
     if (!c || !c.errors) return '';
-    if (c.errors['required']) return 'Campo obrigatório.';
-    if (c.errors['email']) return 'E-mail inválido.';
-    if (c.errors['minlength']) return `Mínimo ${c.errors['minlength'].requiredLength} caracteres.`;
-    if (c.errors['maxlength']) return `Máximo ${c.errors['maxlength'].requiredLength} caracteres.`;
-    return 'Inválido.';
+    if (c.errors['required']) return this.translate.instant('contact.error_required');
+    if (c.errors['email']) return this.translate.instant('contact.error_email');
+    if (c.errors['minlength']) return this.translate.instant('contact.error_minlength', { length: c.errors['minlength'].requiredLength });
+    if (c.errors['maxlength']) return this.translate.instant('contact.error_maxlength', { length: c.errors['maxlength'].requiredLength });
+    return this.translate.instant('contact.error_invalid');
   }
 }
