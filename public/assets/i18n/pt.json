@@ -2,7 +2,11 @@
   "nav": {
     "projects": "Projetos Selecionados",
     "about": "Sobre",
-    "contact": "Fale comigo"
+    "contact": "Fale comigo",
+    "language": "Idioma",
+    "menu": "Menu",
+    "menu_open": "Abrir menu",
+    "menu_close": "Fechar menu"
   },
   "hero": {
     "title": "Um desenvolvedor sênior.",

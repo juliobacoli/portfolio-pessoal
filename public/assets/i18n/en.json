@@ -2,7 +2,11 @@
   "nav": {
     "projects": "Selected Projects",
     "about": "About",
-    "contact": "Get in touch"
+    "contact": "Get in touch",
+    "language": "Language",
+    "menu": "Menu",
+    "menu_open": "Open menu",
+    "menu_close": "Close menu"
   },
   "hero": {
     "title": "A senior developer.",

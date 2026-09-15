@@ -34,6 +34,10 @@ export class App implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.metricsService.trackVisit();
+
+    // Quem pediu menos movimento no sistema fica sem scroll suave; âncoras usam o pulo nativo
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     this.lenis = new Lenis({
       autoRaf: true,
     });

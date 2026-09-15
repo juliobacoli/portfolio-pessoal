@@ -47,4 +47,9 @@
     color: #000000;
     // O JS vai cuidar do transform de posição (translate), não definimos scale/translate aqui mais.
   }
+
+  // Anula o efeito de fugir do mouse (o JS aplica transform inline)
+  @media (prefers-reduced-motion: reduce) {
+    transform: none !important;
+  }
 }

@@ -1,0 +1,14 @@
+// Desktop: garante altura mínima de uma tela (menos o header fixo de 80px) para a âncora #contact
+// sempre conseguir encostar no header, sem sobra da seção anterior.
+// No mobile fica com altura natural, senão sobra um vazio enorme abaixo do único botão.
+footer {
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100svh - 80px);
+  }
+}
+
+app-footer-bar {
+  flex-grow: 1;
+}
