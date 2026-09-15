@@ -2,6 +2,10 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
+const DIST = path.join(__dirname, 'dist/portfolio-pessoal/browser');
+// Arquivos gerados pelo build com hash no nome (ex.: main-HWQHVFZH.js) nunca mudam de conteúdo
+const HASHED = /-[A-Z0-9]{8}\.(js|css)$/;
+
 app.set('trust proxy', true);
 
 app.use((req, res, next) => {
@@ -32,10 +36,22 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static(path.join(__dirname, 'dist/portfolio-pessoal/browser')));
+app.use(express.static(DIST, {
+  setHeaders: (res, filePath) => {
+    if (HASHED.test(filePath)) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    } else if (filePath.endsWith('.html') || filePath.endsWith('.json')) {
+      // index.html e traduções: sempre revalida, para o deploy novo aparecer na hora
+      res.setHeader('Cache-Control', 'no-cache');
+    } else {
+      res.setHeader('Cache-Control', 'public, max-age=3600');
+    }
+  },
+}));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/portfolio-pessoal/browser/index.html'));
+  res.setHeader('Cache-Control', 'no-cache');
+  res.sendFile(path.join(DIST, 'index.html'));
 });
 
 app.listen(process.env.PORT || 8080);

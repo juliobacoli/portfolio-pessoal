@@ -12,6 +12,7 @@ import {
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ContactModalState } from '../../services/contact-modal-state';
 import { ContactService } from '../../services/contact';
+import { ScrollLock } from '../../services/scroll-lock';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 type SubmitState = 'idle' | 'sending' | 'success' | 'error';
@@ -29,12 +30,14 @@ export class ContactModal {
   private readonly fb = inject(FormBuilder);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly translate = inject(TranslateService);
+  private readonly scrollLock = inject(ScrollLock);
 
   protected readonly submitState = signal<SubmitState>('idle');
   protected readonly errorMsg = signal<string>('');
   protected readonly submitAttempted = signal(false);
   protected readonly shake = signal(false);
   protected readonly showDiscardConfirm = signal(false);
+  private savedPayloadKey: string | null = null;
 
   protected readonly form = this.fb.nonNullable.group({
     nome: ['', [Validators.required, Validators.minLength(2)]],
@@ -50,10 +53,8 @@ export class ContactModal {
   constructor() {
     effect(() => {
       const open = this.state.isOpen();
-      if (open) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
+      this.scrollLock.set('contact-modal', open);
+      if (!open) {
         this.resetIfClosed();
       }
     });
@@ -62,6 +63,7 @@ export class ContactModal {
   private resetIfClosed() {
     setTimeout(() => {
       this.form.reset();
+      this.savedPayloadKey = null;
       this.submitState.set('idle');
       this.errorMsg.set('');
       this.submitAttempted.set(false);
@@ -157,13 +159,22 @@ export class ContactModal {
     this.submitState.set('sending');
     this.errorMsg.set('');
 
+    const payload = {
+      nome: raw.nome.trim(),
+      email: raw.email.trim(),
+      tipo: raw.tipo || undefined,
+      mensagem: raw.mensagem.trim(),
+    };
+    const payloadKey = JSON.stringify(payload);
+
     try {
-      await this.contactService.send({
-        nome: raw.nome.trim(),
-        email: raw.email.trim(),
-        tipo: raw.tipo || undefined,
-        mensagem: raw.mensagem.trim(),
-      });
+      // Se o contato já foi gravado e só o email falhou, o retry não grava de novo
+      if (this.savedPayloadKey !== payloadKey) {
+        await this.contactService.save(payload);
+        this.savedPayloadKey = payloadKey;
+      }
+      await this.contactService.notify(payload);
+      this.savedPayloadKey = null;
       this.submitState.set('success');
     } catch (err) {
       console.error('Erro ao enviar contato:', err);

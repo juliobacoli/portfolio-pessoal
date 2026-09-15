@@ -1,7 +1,9 @@
-import { Component, input, signal, inject } from '@angular/core';
+import { Component, HostListener, input, signal, inject } from '@angular/core';
 import { NavBrand } from '../nav-brand/nav-brand';
 import { NavMenu } from '../nav-menu/nav-menu';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { Lang, LanguageService } from '../../../services/language';
+import { ScrollLock } from '../../../services/scroll-lock';
 
 @Component({
   selector: 'app-header',
@@ -14,22 +16,29 @@ export class Header {
   projectCount = input<number>(0);
 
   isBsOpen = signal(false);
-  private translate = inject(TranslateService);
-  currentLang = signal<string>('pt');
+  private language = inject(LanguageService);
+  private scrollLock = inject(ScrollLock);
+  currentLang = this.language.current;
 
-  switchLang(lang: string) {
-    this.translate.use(lang);
-    this.currentLang.set(lang);
+  switchLang(lang: Lang) {
+    this.language.use(lang);
   }
 
   toggleBs() {
-    const next = !this.isBsOpen();
-    this.isBsOpen.set(next);
-    document.body.style.overflow = next ? 'hidden' : '';
+    this.setBs(!this.isBsOpen());
   }
 
   closeBs() {
-    this.isBsOpen.set(false);
-    document.body.style.overflow = '';
+    this.setBs(false);
+  }
+
+  @HostListener('document:keydown.escape')
+  onEsc() {
+    if (this.isBsOpen()) this.closeBs();
+  }
+
+  private setBs(open: boolean) {
+    this.isBsOpen.set(open);
+    this.scrollLock.set('header-menu', open);
   }
 }

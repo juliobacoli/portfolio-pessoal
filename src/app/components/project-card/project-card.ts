@@ -13,4 +13,6 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class ProjectCard {
   project = input.required<Project>();
+  // Com "reduzir movimento" ativo, o vídeo fica parado no poster
+  protected readonly autoplay = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }

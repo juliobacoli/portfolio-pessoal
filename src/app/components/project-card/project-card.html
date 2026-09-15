@@ -3,15 +3,22 @@
     <a [href]="project().url" target="_blank" rel="noopener" class="image-link">
       @if (project().videoUrl) {
         <video 
-          [src]="project().videoUrl" 
-          [autoplay]="true" 
+          [src]="project().videoUrl"
+          [poster]="project().imageUrl"
+          [autoplay]="autoplay"
           [loop]="true" 
           [muted]="true" 
           playsinline 
           class="project-image">
         </video>
       } @else {
-        <img [src]="project().imageUrl" [alt]="project().name | translate" class="project-image" />
+        <img
+          [src]="project().imageUrl"
+          [alt]="project().name | translate"
+          loading="lazy"
+          decoding="async"
+          class="project-image"
+        />
       }
     </a>
   </div>

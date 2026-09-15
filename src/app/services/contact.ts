@@ -25,7 +25,8 @@ function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise
 export class ContactService {
   private readonly firestore = inject(Firestore);
 
-  async send(payload: ContactPayload): Promise<void> {
+  // Grava e notifica em etapas separadas para o chamador poder repetir só o email
+  async save(payload: ContactPayload): Promise<void> {
     const colecao = collection(this.firestore, 'contatos_recebidos');
     const cleanPayload = Object.fromEntries(
       Object.entries(payload).filter(([, v]) => v !== undefined)
@@ -39,7 +40,9 @@ export class ContactService {
       REQUEST_TIMEOUT_MS,
       'gravar contato no Firestore'
     );
+  }
 
+  async notify(payload: ContactPayload): Promise<void> {
     await withTimeout(this.sendEmail(payload), REQUEST_TIMEOUT_MS, 'enviar email');
   }
 

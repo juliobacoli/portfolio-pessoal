@@ -1,6 +1,12 @@
-import { Component, HostListener, OnInit, ElementRef, ViewChildren, QueryList, AfterViewInit, inject } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { ContactModalState } from '../../../services/contact-modal-state';
 import { TranslateModule } from '@ngx-translate/core';
+
+const MOBILE_BREAKPOINT = 768;
+const MOBILE_OVALS = 1;
+const DESKTOP_OVALS = 16;
+// Negativo = move na direção oposta ao mouse; o valor controla a distância
+const DODGE_FACTOR = -0.4;
 
 @Component({
   selector: 'app-cta-wallpaper',
@@ -8,61 +14,38 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './cta-wallpaper.html',
   styleUrl: './cta-wallpaper.scss',
 })
-export class CtaWallpaper implements OnInit, AfterViewInit {
-  ovals: number[] = [];
+export class CtaWallpaper {
+  ovals: number[] = this.buildOvals();
   private modalState = inject(ContactModalState);
-
-  @ViewChildren('ovalElement') ovalElements!: QueryList<ElementRef>;
 
   openContact(event: MouseEvent) {
     this.modalState.open(event.currentTarget as HTMLElement);
   }
 
-  ngOnInit(): void {
-    this.calculate();
-  }
-
-  ngAfterViewInit() {
-    this.setupMagneticDodge();
-  }
-
   @HostListener('window:resize')
-  calculate(): void {
-    const isMobile = window.innerWidth < 768;
-    this.ovals = Array(isMobile ? 1 : 16).fill(0);
-    
-    // Re-setup listener after recreating elements
-    setTimeout(() => this.setupMagneticDodge(), 100);
+  onResize(): void {
+    // Só recria os botões quando cruza o breakpoint (mobile <-> desktop)
+    const next = this.buildOvals();
+    if (next.length !== this.ovals.length) {
+      this.ovals = next;
+    }
   }
 
-  private setupMagneticDodge() {
-    this.ovalElements.forEach((ovalRef) => {
-      const el = ovalRef.nativeElement as HTMLElement;
-      
-      el.addEventListener('mousemove', (e: MouseEvent) => {
-        const rect = el.getBoundingClientRect();
-        const x = e.clientX - rect.left; // x position within the element
-        const y = e.clientY - rect.top;  // y position within the element
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        // Calculate distance from center
-        const distanceX = x - centerX;
-        const distanceY = y - centerY;
-        
-        // The magic: move the element IN THE OPPOSITE DIRECTION of the mouse
-        // Multiplier controls how far it dodges
-        const moveX = (distanceX * -0.4); 
-        const moveY = (distanceY * -0.4);
+  dodge(event: MouseEvent) {
+    const el = event.currentTarget as HTMLElement;
+    const rect = el.getBoundingClientRect();
+    const moveX = (event.clientX - rect.left - rect.width / 2) * DODGE_FACTOR;
+    const moveY = (event.clientY - rect.top - rect.height / 2) * DODGE_FACTOR;
 
-        el.style.transform = `translate(${moveX}px, ${moveY}px)`;
-      });
+    el.style.transform = `translate(${moveX}px, ${moveY}px)`;
+  }
 
-      el.addEventListener('mouseleave', () => {
-        // Snap back to center smoothly when mouse leaves
-        el.style.transform = 'translate(0px, 0px)';
-      });
-    });
+  resetPosition(event: MouseEvent) {
+    (event.currentTarget as HTMLElement).style.transform = 'translate(0px, 0px)';
+  }
+
+  private buildOvals(): number[] {
+    const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+    return Array(isMobile ? MOBILE_OVALS : DESKTOP_OVALS).fill(0);
   }
 }

@@ -8,7 +8,5 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './hero-section.scss',
 })
 export class HeroSection {
-  heroText = input<string>('');
   clientName = input<string>('');
-  clientUrl = input<string>('');
 }

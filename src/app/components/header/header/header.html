@@ -1,26 +1,41 @@
 <header class="header">
   <div class="brand-group">
     <app-nav-brand [name]="brandName()" />
-    <div class="lang-switcher-mobile">
-      <button type="button" [class.active]="currentLang() === 'pt'" (click)="switchLang('pt')">PT</button>
-      <span class="lang-sep">|</span>
-      <button type="button" [class.active]="currentLang() === 'en'" (click)="switchLang('en')">EN</button>
+    <div class="lang-switcher-mobile" role="group" [attr.aria-label]="'nav.language' | translate">
+      <button type="button" [class.active]="currentLang() === 'pt'" [attr.aria-pressed]="currentLang() === 'pt'" (click)="switchLang('pt')">PT</button>
+      <span class="lang-sep" aria-hidden="true">|</span>
+      <button type="button" [class.active]="currentLang() === 'en'" [attr.aria-pressed]="currentLang() === 'en'" (click)="switchLang('en')">EN</button>
     </div>
   </div>
   <app-nav-menu [projectCount]="projectCount()" />
-  <div class="lang-switcher">
-    <button type="button" [class.active]="currentLang() === 'pt'" (click)="switchLang('pt')">PT</button>
-    <span class="lang-sep">|</span>
-    <button type="button" [class.active]="currentLang() === 'en'" (click)="switchLang('en')">EN</button>
+  <div class="lang-switcher" role="group" [attr.aria-label]="'nav.language' | translate">
+    <button type="button" [class.active]="currentLang() === 'pt'" [attr.aria-pressed]="currentLang() === 'pt'" (click)="switchLang('pt')">PT</button>
+    <span class="lang-sep" aria-hidden="true">|</span>
+    <button type="button" [class.active]="currentLang() === 'en'" [attr.aria-pressed]="currentLang() === 'en'" (click)="switchLang('en')">EN</button>
   </div>
-  <button type="button" class="bs-hamburger" [class.bs-open]="isBsOpen()" (click)="toggleBs()" aria-label="Abrir menu">
+  <button
+    type="button"
+    class="bs-hamburger"
+    [class.bs-open]="isBsOpen()"
+    (click)="toggleBs()"
+    aria-controls="bs-sheet"
+    [attr.aria-expanded]="isBsOpen()"
+    [attr.aria-label]="(isBsOpen() ? 'nav.menu_close' : 'nav.menu_open') | translate"
+  >
     <span></span><span></span><span></span>
   </button>
 </header>
 
-<div class="bs-backdrop" [class.bs-active]="isBsOpen()" (click)="closeBs()"></div>
-<div class="bs-sheet" [class.bs-active]="isBsOpen()">
-  <div class="bs-handle"></div>
+<div class="bs-backdrop" [class.bs-active]="isBsOpen()" (click)="closeBs()" aria-hidden="true"></div>
+<!-- inert quando fechado: links escondidos não recebem foco pelo teclado -->
+<nav
+  id="bs-sheet"
+  class="bs-sheet"
+  [class.bs-active]="isBsOpen()"
+  [attr.aria-label]="'nav.menu' | translate"
+  [attr.inert]="isBsOpen() ? null : ''"
+>
+  <div class="bs-handle" aria-hidden="true"></div>
   <a class="bs-link" href="#projects" (click)="closeBs()">
     {{ 'nav.projects' | translate }}
     @if (projectCount() > 0) {
@@ -29,4 +44,4 @@
   </a>
   <a class="bs-link" href="#about" (click)="closeBs()">{{ 'nav.about' | translate }}</a>
   <a class="bs-link" href="#contact" (click)="closeBs()">{{ 'nav.contact' | translate }}</a>
-</div>
+</nav>
