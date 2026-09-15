@@ -1,0 +1,42 @@
+name: Code Scanning
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+  # Necessário para enviar o relatório ao GitHub Code Scanning (aba Security)
+  security-events: write
+
+jobs:
+  eslint:
+    name: ESLint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Só registra os problemas: não quebra o workflow quando o lint encontra erros
+      - name: Run ESLint
+        run: npx eslint "src/**/*.ts" "src/**/*.html" -f @microsoft/eslint-formatter-sarif -o eslint-results.sarif
+        continue-on-error: true
+
+      - name: Upload to Code Scanning
+        uses: github/codeql-action/upload-sarif@v4
+        if: always()
+        with:
+          sarif_file: eslint-results.sarif
+          category: eslint
