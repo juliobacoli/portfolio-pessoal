@@ -48,8 +48,8 @@
     // O JS vai cuidar do transform de posição (translate), não definimos scale/translate aqui mais.
   }
 
-  // Anula o efeito de fugir do mouse (o JS aplica transform inline)
+  // Mantém a animação mesmo com "reduzir movimento": sobrepõe a regra global do styles.scss
   @media (prefers-reduced-motion: reduce) {
-    transform: none !important;
+    transition-duration: 0.2s, 0.2s, 0.2s, 0.4s !important;
   }
 }
