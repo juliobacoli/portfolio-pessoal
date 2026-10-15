@@ -32,6 +32,12 @@ export class ProjectsService {
       imageUrl: '/estetica.webp',
     },
     {
+      name: 'projects.bianka_bacoli.name',
+      description: 'projects.bianka_bacoli.description',
+      url: 'https://www.bbacoli.com.br/',
+      imageUrl: '/bianka-bacoli.svg',
+    },
+    {
       name: 'projects.ic_pedra_angular.name',
       description: 'projects.ic_pedra_angular.description',
       url: 'https://www.icpedraangular.com.br/',
